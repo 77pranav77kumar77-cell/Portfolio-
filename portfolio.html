@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- used to fetch logoes -->
+<meta charset="UTF-8">
+<!-- according to the device it adjusts as it sets widht to device width and zoom to 100  -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- it shows the tab name to be Pranav Kumar | Portfolio on brouser -->
+<title>Pranav Kumar | Portfolio</title>
+<!-- this have some pre defined variables and we are setting some them foe the whole website as we will bw using this in some or different way -->
+<style>
+  :root{
+    --bg:#0f1115;
+    --bg-alt:#161923;
+    --card:#1c2030;
+    --text:#eef0f5;
+    --muted:#a3a8b8;
+    --accent:#6c8cff;
+    --accent-2:#ff8c6c;
+    --border:#2a2f42;
+  }
+  /* sets box sizing and makes the scroll smooth */
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
+    background:var(--bg);
+    /* this calls the collor from the rout and sets the text color to as the theam */
+    color:var(--text);
+    line-height:1.6;
+  }
+  a{color:inherit;text-decoration:none;}
+  /* sets the sizing of container used further */
+  .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  /* Header - Flexbox */
+  header{
+    position:sticky; top:0;
+    padding-top:16px;
+    background:rgba(15,17,21,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+    z-index:10;
+  }
+  /* creats the nav bar  */
+  nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:16px;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  .logo{font-size:1.3rem;font-weight:700;letter-spacing:0.5px;}
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:24px;flex-wrap:wrap;}
+  .nav-links a{color:var(--muted);font-weight:500;transition:color .2s;}
+  .nav-links a:hover{color:var(--accent);}
+
+  /* Hero - Flexbox */
+  .hero{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:16px;
+    padding:80px 0 60px;
+  }
+  .hero h1{font-size:2.6rem;font-weight:800;}
+  .hero h1 span{color:var(--accent);}
+  .hero p{color:var(--muted);max-width:600px;font-size:1.1rem;}
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+  .btn{
+    padding:12px 24px;
+    border-radius:8px;
+    font-weight:600;
+    border:1px solid var(--accent);
+    transition:transform .15s, background .2s;
+  }
+  .btn.primary{background:var(--accent);color:#fff;}
+  .btn.outline{color:var(--accent);}
+  .btn:hover{transform:translateY(-2px);}
+
+  section{padding:60px 0;border-top:1px solid var(--border);}
+  h2{font-size:1.8rem;margin-bottom:32px;font-weight:700;}
+  h2 .accent-dot{color:var(--accent);}
+
+  /* Skills - Grid */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+    gap:16px;
+  }
+  .skill-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:18px;
+    text-align:center;
+    font-weight:600;
+    transition:transform .2s, border-color .2s;
+  }
+  .skill-card:hover{transform:translateY(-4px);border-color:var(--accent);}
+
+  /* Achievements - Grid */
+  .achieve-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:20px;
+  }
+  .achieve-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .achieve-card .icon{font-size:1.8rem;}
+  .achieve-card h3{font-size:1.1rem;}
+  .achieve-card p{color:var(--muted);font-size:0.95rem;}
+  .achieve-card .tag{
+    align-self:flex-start;
+    background:rgba(108,140,255,0.15);
+    color:var(--accent);
+    font-size:0.75rem;
+    font-weight:700;
+    padding:4px 10px;
+    border-radius:20px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+
+  /* Projects - Flexbox */
+  .projects-flex{
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+  }
+  .project-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:24px;
+    flex:1 1 300px; /* grow shrink base width */
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .project-card h3{font-size:1.15rem;}
+  .project-card p{color:var(--muted);font-size:0.95rem;flex-grow:1;}
+  .stack{display:flex;flex-wrap:wrap;gap:8px;}
+  .stack span{
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    font-size:0.75rem;
+    padding:4px 10px;
+    border-radius:6px;
+    color:var(--muted);
+  }
+
+  /* Contact - Flexbox */
+  .contact-flex{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:36px;
+  }
+  .contact-flex h2{margin-bottom:6px;}
+  .contact-flex p{color:var(--muted);}
+  .social-row{display:flex;gap:14px;}
+  .social-row a{
+    border:1px solid var(--border);
+    padding:10px 18px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:0.9rem;
+    transition:border-color .2s, color .2s;
+  }
+  .social-row a:hover{border-color:var(--accent);color:var(--accent);}
+
+  footer{
+    text-align:center;
+    padding:28px 0;
+    color:var(--muted);
+    font-size:0.85rem;
+  }
+
+  @media (max-width:600px){
+    .hero h1{font-size:2rem;}
+    .contact-flex{flex-direction:column;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+<!-- calls container witch we have sized before  -->
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">Pranav<span>.</span></div>
+      <div class="nav-links">
+        <!-- scrool to the class whair it have the clickek one  -->
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="hero" id="about">
+    <h1>Hi, I'm <span>Pranav Kumar</span></h1>
+    <p>Full-stack developer passionate about building clean, performant web applications. I love turning complex problems into simple, elegant interfaces.</p>
+    <div class="btn-row">
+      <a href="#projects" class="btn primary">View Projects</a>
+      <a href="#contact" class="btn outline">Contact Me</a>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills<span class="accent-dot">.</span></h2>
+    <div class="skills-grid">
+      <div class="skill-card">HTML5</div>
+      <div class="skill-card">CSS3</div>
+      <div class="skill-card">JavaScript</div>
+      <div class="skill-card">React</div>
+      <div class="skill-card">Node.js</div>
+      <div class="skill-card">Python</div>
+      <div class="skill-card">SQL</div>
+      <div class="skill-card">Git</div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <h2>Achievements<span class="accent-dot">.</span></h2>
+    <div class="achieve-grid">
+      <div class="achieve-card">
+        <div class="icon">🏆</div>
+        <span class="tag">Hackathon</span>
+        <h3>1st Place — CodeSprint 2024</h3>
+        <p>Led a team of 4 to build an AI-powered study planner in 24 hours, beating 120+ teams.</p>
+      </div>
+      <div class="achieve-card">
+        <div class="icon">🎓</div>
+        <span class="tag">Academic</span>
+        <h3>University Gold Medalist</h3>
+        <p>Graduated top of class in Computer Science with a CGPA of 9.4/10.</p>
+      </div>
+      <div class="achieve-card">
+        <div class="icon">💡</div>
+        <span class="tag">Open Source</span>
+        <h3>500+ GitHub Stars</h3>
+        <p>Maintain an open-source UI component library used by 2,000+ developers.</p>
+      </div>
+      <div class="achieve-card">
+        <div class="icon">🚀</div>
+        <span class="tag">Internship</span>
+        <h3>Google Summer of Code 2023</h3>
+        <p>Contributed to an open-source dev-tools project, shipping 15+ merged PRs.</p>
+      </div>
+      <div class="achieve-card">
+        <div class="icon">📝</div>
+        <span class="tag">Publication</span>
+        <h3>Published Research Paper</h3>
+        <p>Co-authored a paper on efficient neural network pruning, presented at a student AI conference.</p>
+      </div>
+      <div class="achieve-card">
+        <div class="icon">🌟</div>
+        <span class="tag">Recognition</span>
+        <h3>Top 1% on Competitive Coding</h3>
+        <p>Ranked in the top 1% globally on a major competitive programming platform.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects<span class="accent-dot">.</span></h2>
+    <div class="projects-flex">
+      <div class="project-card">
+        <h3>TaskFlow — Project Manager</h3>
+        <p>A Kanban-style task management app with real-time collaboration and drag-and-drop boards.</p>
+        <div class="stack"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+      </div>
+      <div class="project-card">
+        <h3>WeatherNow</h3>
+        <p>A minimal weather dashboard with 7-day forecasts, built with a clean data-driven UI.</p>
+        <div class="stack"><span>JavaScript</span><span>API</span><span>CSS Grid</span></div>
+      </div>
+      <div class="project-card">
+        <h3>DevBlog CMS</h3>
+        <p>A lightweight content management system for developer blogs with markdown support.</p>
+        <div class="stack"><span>Python</span><span>Flask</span><span>SQLite</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-flex">
+      <div>
+        <h2>Let's work together<span class="accent-dot">.</span></h2>
+        <p>Open to freelance projects and full-time opportunities.</p>
+      </div>
+      <div class="social-row">
+        <a href="mailto:pranav.kumar@example.com">Email</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  &copy; 2026 Pranav Kumar. Built with HTML, CSS Grid &amp; Flexbox.
+</footer>
+
+</body>
+</html>
